@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Aplicações Shiny</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 60px 20px 20px 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 36px;
+    }
+
+    p {
+      opacity: 0.9;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card {
+      background: white;
+      color: #333;
+      width: 300px;
+      border-radius: 15px;
+      padding: 30px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    footer {
+      padding: 30px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Aplicações Shiny</h1>
+  <p>Selecione uma aplicação para acessar</p>
+</header>
+
+<div class="container">
+
+  <a class="card" href="https://confiabilidadecimatec.shinyapps.io/AnaliseWeibull/" target="_blank">
+    <h2>App 1</h2>
+    <p>Análise de Weibull.</p>
+  </a>
+
+  <a class="card" href="https://confiabilidadecimatec.shinyapps.io/PFDemand/" target="_blank">
+    <h2>App 2</h2>
+    <p>Probabilidade de falha sob demanda.</p>
+  </a>
+
+  <a class="card" href="https://confiabilidadecimatec.shinyapps.io/Curvadecustos/" target="_blank">
+    <h2>App 3</h2>
+    <p>Curva de custos.</p>
+  </a>
+
+</div>
+
+<footer>
+  © 2026 • Desenvolvido com Shiny
+</footer>
+
+</body>
+</html>
