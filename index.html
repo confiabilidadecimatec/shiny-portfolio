@@ -2,63 +2,77 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Aplicações Shiny</title>
+  <title>Plataforma de Análises em Confiabilidade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(135deg, #1f3c88, #5f2c82);
       color: white;
       text-align: center;
     }
 
     header {
-      padding: 60px 20px 20px 20px;
+      padding: 70px 20px 30px 20px;
     }
 
     h1 {
-      margin-bottom: 10px;
-      font-size: 36px;
+      margin-bottom: 15px;
+      font-size: 38px;
+      font-weight: 600;
     }
 
-    p {
+    header p {
+      font-size: 18px;
       opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     .container {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 30px;
-      padding: 40px;
+      gap: 35px;
+      padding: 50px 30px;
     }
 
     .card {
       background: white;
       color: #333;
-      width: 300px;
-      border-radius: 15px;
-      padding: 30px;
+      width: 340px;
+      border-radius: 18px;
+      padding: 35px;
       text-decoration: none;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-align: left;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      transform: translateY(-10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
     }
 
     .card h2 {
       margin-top: 0;
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #1f3c88;
+    }
+
+    .card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
     }
 
     footer {
-      padding: 30px;
+      padding: 40px;
       font-size: 14px;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
   </style>
@@ -66,31 +80,51 @@
 <body>
 
 <header>
-  <h1>Aplicações Shiny</h1>
-  <p>Selecione uma aplicação para acessar</p>
+  <h1>Plataforma de Análises em Confiabilidade e Gestão de Ativos</h1>
+  <p>
+    Conjunto de aplicações desenvolvidas em Shiny para análise estatística,
+    modelagem de confiabilidade, avaliação de risco e otimização de políticas
+    de manutenção baseadas em fundamentos de engenharia.
+  </p>
 </header>
 
 <div class="container">
 
   <a class="card" href="https://confiabilidadecimatec.shinyapps.io/AnaliseWeibull/" target="_blank">
-    <h2>App 1</h2>
-    <p>Análise de Weibull.</p>
+    <h2>Análise de Confiabilidade – Distribuição de Weibull</h2>
+    <p>
+      Aplicação dedicada à modelagem de dados de falha utilizando a
+      distribuição de Weibull. Permite estimar parâmetros, curvas de
+      confiabilidade, taxa de falha e vida característica, além de
+      calcular o tamanho amostral necessário para testes de vida
+      acelerada e experimentos de confiabilidade.
+    </p>
   </a>
 
   <a class="card" href="https://confiabilidadecimatec.shinyapps.io/PFDemand/" target="_blank">
-    <h2>App 2</h2>
-    <p>Probabilidade de falha sob demanda.</p>
+    <h2>PFDemand – Probabilidade de Falha sob Demanda</h2>
+    <p>
+      Ferramenta para cálculo da Probabilidade de Falha sob Demanda (PFD),
+      incluindo modelagem temporal da PFD(t), cálculo de PFDavg e
+      combinação estrutural via Fault Tree Analysis (FTA) com portões
+      lógicos AND/OR. Indicada para estudos alinhados a IEC 61508 / 61511.
+    </p>
   </a>
 
   <a class="card" href="https://confiabilidadecimatec.shinyapps.io/Curvadecustos/" target="_blank">
-    <h2>App 3</h2>
-    <p>Curva de custos.</p>
+    <h2>Curva de Custos e Tempo Ótimo de Manutenção</h2>
+    <p>
+      Aplicação voltada à otimização de políticas de manutenção preventiva.
+      A partir da distribuição estatística do ativo e dos custos de
+      manutenção corretiva e preventiva, determina o tempo ótimo de
+      intervenção que minimiza o custo esperado ao longo do ciclo de vida.
+    </p>
   </a>
 
 </div>
 
 <footer>
-  © 2026 • Desenvolvido com Shiny
+  © 2026 • Plataforma desenvolvida em R Shiny para aplicações em Confiabilidade e Engenharia de Manutenção
 </footer>
 
 </body>
