@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HUB de Confiabilidade e Análise RAM</title>
+
+  <style>
+    :root{
+      --bg1:#07111f;
+      --bg2:#101c34;
+      --card:#0f1a2f;
+      --card2:#14213d;
+      --text:#eef3ff;
+      --muted:#aeb8cf;
+      --accent:#6d5dfc;
+      --accent2:#20c997;
+      --warning:#fbbf24;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 24px 70px rgba(0,0,0,.45);
+      --radius:22px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(109,93,252,.35), transparent 60%),
+        radial-gradient(900px 700px at 85% 15%, rgba(32,201,151,.22), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:42px 18px 32px;
+    }
+
+    .hero{
+      background:rgba(15,26,47,.74);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      padding:28px;
+      margin-bottom:22px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:280px;
+      height:280px;
+      right:-120px;
+      top:-100px;
+      background:radial-gradient(circle, rgba(109,93,252,.34), transparent 70%);
+      pointer-events:none;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:rgba(109,93,252,.15);
+      border:1px solid rgba(109,93,252,.35);
+      color:var(--text);
+      font-size:13px;
+      letter-spacing:.2px;
+      margin-bottom:16px;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:42px;
+      line-height:1.08;
+      letter-spacing:-.8px;
+    }
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.65;
+      max-width:900px;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      padding:8px;
+      border-radius:18px;
+      background:rgba(15,26,47,.62);
+      border:1px solid rgba(255,255,255,.09);
+      box-shadow:0 12px 38px rgba(0,0,0,.25);
+    }
+
+    .tab-button{
+      flex:1;
+      min-width:240px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      padding:14px 16px;
+      border-radius:14px;
+      cursor:pointer;
+      font-family:inherit;
+      font-size:15px;
+      font-weight:800;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    .tab-button:hover{
+      transform:translateY(-2px);
+      border-color:rgba(109,93,252,.45);
+      color:var(--text);
+    }
+
+    .tab-button.active{
+      color:var(--text);
+      background:linear-gradient(135deg, rgba(109,93,252,.95), rgba(109,93,252,.48));
+      border-color:rgba(109,93,252,.40);
+    }
+
+    .tab-panel{
+      display:none;
+    }
+
+    .tab-panel.active{
+      display:block;
+    }
+
+    .section-heading{
+      margin:0 0 16px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      margin-bottom:8px;
+      color:var(--accent2);
+      font-size:13px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+
+    .section-heading h2{
+      margin:0 0 8px;
+      font-size:28px;
+      line-height:1.2;
+    }
+
+    .section-heading p{
+      margin:0;
+      max-width:900px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .main{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      background:rgba(15,26,47,.76);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      overflow:hidden;
+    }
+
+    .module-list{
+      padding:12px;
+    }
+
+    .module{
+      width:100%;
+      text-align:left;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:15px;
+      border-radius:17px;
+      border:1px solid transparent;
+      background:linear-gradient(180deg, rgba(20,33,61,.70), rgba(15,26,47,.45));
+      color:var(--text);
+      cursor:pointer;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+      margin-bottom:10px;
+      font-family:inherit;
+    }
+
+    .module:last-child{ margin-bottom:0; }
+
+    .module:hover,
+    .module.active{
+      transform:translateY(-2px);
+      border-color:rgba(109,93,252,.55);
+      background:linear-gradient(180deg, rgba(109,93,252,.18), rgba(20,33,61,.68));
+    }
+
+    .module-icon{
+      width:38px;
+      height:38px;
+      flex:0 0 auto;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:rgba(109,93,252,.16);
+      border:1px solid rgba(109,93,252,.26);
+      font-size:18px;
+    }
+
+    .module h3{
+      margin:0 0 5px;
+      font-size:16px;
+      line-height:1.25;
+    }
+
+    .module p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .viewer{
+      padding:16px;
+    }
+
+    .video-box{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(0,0,0,.42);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 45px rgba(0,0,0,.35);
+      margin-bottom:16px;
+    }
+
+    .video-box iframe{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .module-details{
+      padding:18px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(109,93,252,.15), rgba(20,33,61,.45));
+      border:1px solid rgba(109,93,252,.20);
+    }
+
+    .module-kicker{
+      color:var(--accent2);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.35px;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+
+    .module-details h2{
+      margin:0 0 8px;
+      font-size:24px;
+      line-height:1.2;
+    }
+
+    .module-details p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .tag{
+      display:inline-flex;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.10);
+      color:rgba(238,243,255,.88);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      padding:11px 15px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.11);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(109,93,252,.55);
+      background:rgba(109,93,252,.14);
+    }
+
+    .btn.secondary{
+      margin-top:16px;
+      background:rgba(255,255,255,.06);
+    }
+
+    .commercial-note{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid rgba(251,191,36,.22);
+      background:rgba(251,191,36,.08);
+      color:rgba(238,243,255,.86);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .tools-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+    }
+
+    .tool-card{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      min-height:230px;
+      padding:18px;
+      border-radius:18px;
+      text-decoration:none;
+      color:var(--text);
+      background:linear-gradient(180deg, rgba(20,33,61,.72), rgba(15,26,47,.48));
+      border:1px solid rgba(255,255,255,.09);
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .tool-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(32,201,151,.45);
+      background:linear-gradient(180deg, rgba(32,201,151,.12), rgba(20,33,61,.64));
+    }
+
+    .tool-icon{
+      width:42px;
+      height:42px;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      border-radius:15px;
+      background:rgba(32,201,151,.13);
+      border:1px solid rgba(32,201,151,.25);
+      font-size:20px;
+    }
+
+    .tool-card h3{
+      margin:0 0 8px;
+      font-size:16px;
+      line-height:1.25;
+    }
+
+    .tool-card p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .tool-card span{
+      color:var(--accent2);
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .note{
+      margin-top:18px;
+      padding:16px 18px;
+      border-radius:18px;
+      border:1px solid rgba(32,201,151,.22);
+      background:rgba(32,201,151,.08);
+      color:rgba(238,243,255,.86);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    footer{
+      margin-top:18px;
+      color:rgba(238,243,255,.68);
+      font-size:13px;
+      padding:8px 2px;
+    }
+
+    @media (max-width:950px){
+      .main{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:34px;
+      }
+
+      .tools-grid{
+        grid-template-columns:1fr;
+      }
+
+      .tool-card{
+        min-height:auto;
+      }
+    }
+
+    @media (max-width:560px){
+      .wrap{
+        padding-top:26px;
+      }
+
+      .hero{
+        padding:22px;
+      }
+
+      h1{
+        font-size:30px;
+      }
+
+      .tab-button{
+        min-width:100%;
+      }
+
+      .module{
+        padding:13px;
+      }
+
+      .tool-card{
+        flex-direction:column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="badge">Software RAM completo + ferramentas online especializadas</div>
+
+      <h1>HUB de Confiabilidade e Análise RAM</h1>
+
+      <p class="subtitle">
+        Explore demonstrações do RAM Analysis Software, uma solução integrada
+        para estudos de confiabilidade, disponibilidade e mantenabilidade,
+        e acesse ferramentas online para análises específicas de confiabilidade,
+        falha sob demanda e otimização de manutenção.
+      </p>
+    </header>
+
+    <nav class="tabs" aria-label="Abas principais do HUB">
+      <button class="tab-button active" data-tab="software">
+        RAM Analysis Software
+      </button>
+
+      <button class="tab-button" data-tab="tools">
+        Ferramentas Online
+      </button>
+    </nav>
+
+    <main>
+
+      <!-- ABA 1: SOFTWARE RAM -->
+      <section class="tab-panel active" id="tab-software">
+
+        <div class="section-heading">
+          <span class="eyebrow">Software restrito / solução comercial</span>
+          <h2>RAM Analysis Software</h2>
+          <p>
+            O RAM Analysis Software é uma solução mais completa, voltada para
+            aplicações comerciais, projetos técnicos e estudos avançados. Os vídeos
+            abaixo demonstram os principais módulos da plataforma.
+          </p>
+        </div>
+
+        <div class="main">
+
+          <aside class="panel module-list" aria-label="Módulos do RAM Analysis Software">
+
+            <button class="module active"
+              data-title="Ajuste de Distribuições"
+              data-kicker="Módulo 01"
+              data-video="https://www.youtube.com/embed/pNB2hY9Eb5A?autoplay=1&mute=1&loop=1&playlist=pNB2hY9Eb5A&controls=0&modestbranding=1&rel=0&playsinline=1"
+              data-watch="https://youtu.be/pNB2hY9Eb5A"
+              data-desc="Demonstra o módulo de fitting, usado para ajustar distribuições probabilísticas aos dados de falha ou tempo de vida. Esse módulo é a base para estimativas de confiabilidade e análises posteriores."
+              data-tags="Fitting,Distribuições,Confiabilidade,Dados de falha">
+              <span class="module-icon">📈</span>
+              <div>
+                <h3>Ajuste de Distribuições</h3>
+                <p>Modelagem estatística dos dados de falha.</p>
+              </div>
+            </button>
+
+            <button class="module"
+              data-title="Árvore de Falhas"
+              data-kicker="Módulo 02"
+              data-video="https://www.youtube.com/embed/uEW1tjy78ho?autoplay=1&mute=1&loop=1&playlist=uEW1tjy78ho&controls=0&modestbranding=1&rel=0&playsinline=1"
+              data-watch="https://youtu.be/uEW1tjy78ho"
+              data-desc="Apresenta o módulo de Fault Tree Analysis, permitindo estruturar eventos básicos, eventos intermediários e evento topo por meio de relações lógicas."
+              data-tags="FTA,Árvore de Falhas,Eventos,Portões lógicos">
+              <span class="module-icon">🌳</span>
+              <div>
+                <h3>Árvore de Falhas</h3>
+                <p>Construção e análise lógica de cenários de falha.</p>
+              </div>
+            </button>
+
+            <button class="module"
+              data-title="Simulação"
+              data-kicker="Módulo 03"
+              data-video="https://www.youtube.com/embed/pdyQYnifLV8?autoplay=1&mute=1&loop=1&playlist=pdyQYnifLV8&controls=0&modestbranding=1&rel=0&playsinline=1"
+              data-watch="https://youtu.be/pdyQYnifLV8"
+              data-desc="Mostra o módulo de simulação, utilizado para avaliar o comportamento do sistema ao longo do tempo e estimar métricas de desempenho RAM com base nos modelos definidos."
+              data-tags="Simulação,RAM,Monte Carlo,Sistema">
+              <span class="module-icon">⚙️</span>
+              <div>
+                <h3>Simulação</h3>
+                <p>Avaliação dinâmica do comportamento do sistema.</p>
+              </div>
+            </button>
+
+            <button class="module"
+              data-title="Visualização de Resultados"
+              data-kicker="Módulo 04"
+              data-video="https://www.youtube.com/embed/E9yWFU34UZs?autoplay=1&mute=1&loop=1&playlist=E9yWFU34UZs&controls=0&modestbranding=1&rel=0&playsinline=1"
+              data-watch="https://youtu.be/E9yWFU34UZs"
+              data-desc="Demonstra como os resultados são organizados e apresentados no software, facilitando a interpretação das métricas obtidas nas análises e simulações."
+              data-tags="Resultados,Dashboards,Indicadores,Interpretação">
+              <span class="module-icon">📊</span>
+              <div>
+                <h3>Visualização de Resultados</h3>
+                <p>Dashboards e interpretação dos indicadores.</p>
+              </div>
+            </button>
+
+            <button class="module"
+              data-title="Probabilidade de Falha sob Demanda"
+              data-kicker="Módulo 05"
+              data-video="https://www.youtube.com/embed/f7v3YgyMV9M?autoplay=1&mute=1&loop=1&playlist=f7v3YgyMV9M&controls=0&modestbranding=1&rel=0&playsinline=1"
+              data-watch="https://youtu.be/f7v3YgyMV9M"
+              data-desc="Apresenta o cálculo de probabilidade de falha sob demanda, incluindo recursos para apoiar análises de risco e avaliação de sistemas de segurança."
+              data-tags="PFD,PFDavg,Falha sob demanda,Risco">
+              <span class="module-icon">🛡️</span>
+              <div>
+                <h3>Probabilidade sob Demanda</h3>
+                <p>Cálculo de PFD e apoio à análise de risco.</p>
+              </div>
+            </button>
+
+          </aside>
+
+          <section class="panel viewer" aria-label="Demonstração do módulo selecionado">
+
+            <div class="video-box">
+              <iframe
+                id="moduleVideo"
+                src="https://www.youtube.com/embed/pNB2hY9Eb5A?autoplay=1&mute=1&loop=1&playlist=pNB2hY9Eb5A&controls=0&modestbranding=1&rel=0&playsinline=1"
+                title="Demonstração do módulo"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="module-details">
+              <div class="module-kicker" id="moduleKicker">Módulo 01</div>
+
+              <h2 id="moduleTitle">Ajuste de Distribuições</h2>
+
+              <p id="moduleDesc">
+                Demonstra o módulo de fitting, usado para ajustar distribuições
+                probabilísticas aos dados de falha ou tempo de vida. Esse módulo
+                é a base para estimativas de confiabilidade e análises posteriores.
+              </p>
+
+              <div class="tags" id="moduleTags">
+                <span class="tag">Fitting</span>
+                <span class="tag">Distribuições</span>
+                <span class="tag">Confiabilidade</span>
+                <span class="tag">Dados de falha</span>
+              </div>
+
+              <a
+                class="btn secondary"
+                id="watchButton"
+                href="https://youtu.be/pNB2hY9Eb5A"
+                target="_blank">
+                Ver demonstração no YouTube ↗
+              </a>
+            </div>
+
+            <div class="commercial-note">
+              Os vídeos acima funcionam como uma prévia visual do software RAM.
+              Por se tratar de uma solução restrita/comercial, o acesso ao sistema
+              completo pode depender de autorização, projeto ou contato institucional.
+            </div>
+
+          </section>
+
+        </div>
+      </section>
+
+      <!-- ABA 2: FERRAMENTAS ONLINE -->
+      <section class="tab-panel" id="tab-tools">
+
+        <div class="section-heading">
+          <span class="eyebrow">Ferramentas online</span>
+          <h2>Aplicações disponíveis para uso remoto</h2>
+          <p>
+            Além do RAM Analysis Software, este HUB disponibiliza aplicações online
+            que podem ser acessadas diretamente pelo navegador para análises específicas
+            de confiabilidade, falha sob demanda e otimização de manutenção.
+          </p>
+        </div>
+
+        <section class="panel" style="padding:18px;">
+          <div class="tools-grid">
+
+            <a class="tool-card"
+               href="https://confiabilidadecimatec.shinyapps.io/AnaliseWeibull/"
+               target="_blank">
+              <div class="tool-icon">📈</div>
+              <div>
+                <h3>Análise de Confiabilidade – Weibull</h3>
+                <p>
+                  Modelagem de dados de falha com distribuição de Weibull, curvas de
+                  confiabilidade, taxa de falha, vida característica, percentis e suporte
+                  a dimensionamento amostral.
+                </p>
+                <span>Abrir aplicação ↗</span>
+              </div>
+            </a>
+
+            <a class="tool-card"
+               href="https://confiabilidadecimatec.shinyapps.io/PFDemand/"
+               target="_blank">
+              <div class="tool-icon">🛡️</div>
+              <div>
+                <h3>PFDemand – Probabilidade de Falha sob Demanda</h3>
+                <p>
+                  Cálculo de PFD(t), PFDavg e análise por Fault Tree Analysis com
+                  combinação de eventos por portões lógicos AND/OR.
+                </p>
+                <span>Abrir aplicação ↗</span>
+              </div>
+            </a>
+
+            <a class="tool-card"
+               href="https://confiabilidadecimatec.shinyapps.io/Curvadecustos/"
+               target="_blank">
+              <div class="tool-icon">⚙️</div>
+              <div>
+                <h3>Curva de Custos – Tempo Ótimo de Manutenção</h3>
+                <p>
+                  Geração da curva de custo esperado em função do tempo de intervenção,
+                  estimando o intervalo ótimo de manutenção preventiva.
+                </p>
+                <span>Abrir aplicação ↗</span>
+              </div>
+            </a>
+
+          </div>
+        </section>
+
+        <div class="note">
+          Essas ferramentas online são módulos acessíveis remotamente. Elas complementam
+          a proposta do RAM Analysis Software, oferecendo recursos específicos que podem
+          ser utilizados diretamente pelo navegador.
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer>
+      © 2026 • HUB de Confiabilidade e Análise RAM • Engenharia de Manutenção e Risco
+    </footer>
+
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const tab = button.getAttribute("data-tab");
+
+        tabButtons.forEach(item => item.classList.remove("active"));
+        tabPanels.forEach(panel => panel.classList.remove("active"));
+
+        button.classList.add("active");
+        document.getElementById("tab-" + tab).classList.add("active");
+      });
+    });
+
+    const modules = document.querySelectorAll(".module");
+
+    const moduleVideo = document.getElementById("moduleVideo");
+    const moduleKicker = document.getElementById("moduleKicker");
+    const moduleTitle = document.getElementById("moduleTitle");
+    const moduleDesc = document.getElementById("moduleDesc");
+    const moduleTags = document.getElementById("moduleTags");
+    const watchButton = document.getElementById("watchButton");
+
+    function setModule(button){
+      modules.forEach(item => item.classList.remove("active"));
+      button.classList.add("active");
+
+      const title = button.getAttribute("data-title");
+      const kicker = button.getAttribute("data-kicker");
+      const video = button.getAttribute("data-video");
+      const watch = button.getAttribute("data-watch");
+      const desc = button.getAttribute("data-desc");
+      const tags = button.getAttribute("data-tags").split(",");
+
+      moduleVideo.src = video;
+      moduleKicker.textContent = kicker;
+      moduleTitle.textContent = title;
+      moduleDesc.textContent = desc;
+      watchButton.href = watch;
+
+      moduleTags.innerHTML = "";
+
+      tags.forEach(tag => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = tag.trim();
+        moduleTags.appendChild(span);
+      });
+    }
+
+    modules.forEach(button => {
+      button.addEventListener("click", () => setModule(button));
+    });
+  </script>
+
+</body>
+</html>
