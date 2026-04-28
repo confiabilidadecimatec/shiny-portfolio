@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hub de Apps Shiny • Confiabilidade</title>
+  <title>RAM Analysis Software • Demonstrações</title>
 
   <style>
     :root{
-      --bg1:#0b1020;
-      --bg2:#111a33;
-      --card:#0f1730;
-      --card2:#121c3a;
-      --text:#e9ecf3;
-      --muted:#a9b1c6;
-      --accent:#7c5cff;
-      --accent2:#22c55e;
-      --shadow: 0 18px 50px rgba(0,0,0,.45);
-      --radius: 18px;
+      --bg1:#07111f;
+      --bg2:#101c34;
+      --card:#0f1a2f;
+      --card2:#14213d;
+      --text:#eef3ff;
+      --muted:#aeb8cf;
+      --accent:#6d5dfc;
+      --accent2:#20c997;
+      --warning:#fbbf24;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 24px 70px rgba(0,0,0,.45);
+      --radius:22px;
     }
 
     *{ box-sizing:border-box; }
@@ -24,325 +26,535 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text);
+      color:var(--text);
       background:
-        radial-gradient(1200px 800px at 20% 10%, rgba(124,92,255,.35), transparent 55%),
-        radial-gradient(900px 700px at 85% 30%, rgba(34,197,94,.25), transparent 55%),
+        radial-gradient(900px 600px at 15% 10%, rgba(109,93,252,.35), transparent 60%),
+        radial-gradient(900px 700px at 85% 15%, rgba(32,201,151,.22), transparent 60%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
       min-height:100vh;
     }
 
     .wrap{
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 44px 18px 30px 18px;
+      max-width:1180px;
+      margin:0 auto;
+      padding:42px 18px 32px;
     }
 
-    header{
-      text-align:left;
-      margin-bottom: 26px;
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+      align-items:stretch;
+      margin-bottom:22px;
+    }
+
+    .hero-card{
+      background:rgba(15,26,47,.74);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      padding:28px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      width:260px;
+      height:260px;
+      right:-110px;
+      top:-90px;
+      background:radial-gradient(circle, rgba(109,93,252,.34), transparent 70%);
+      pointer-events:none;
     }
 
     .badge{
       display:inline-flex;
-      gap:10px;
       align-items:center;
-      background: rgba(124,92,255,.14);
-      border: 1px solid rgba(124,92,255,.28);
-      padding: 8px 12px;
-      border-radius: 999px;
-      color: var(--text);
-      font-size: 13px;
+      gap:10px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:rgba(109,93,252,.15);
+      border:1px solid rgba(109,93,252,.35);
+      color:var(--text);
+      font-size:13px;
       letter-spacing:.2px;
+      margin-bottom:16px;
     }
 
     h1{
-      margin: 14px 0 10px 0;
-      font-weight: 700;
-      font-size: 36px;
-      line-height: 1.12;
+      margin:0 0 12px;
+      font-size:42px;
+      line-height:1.08;
+      letter-spacing:-.8px;
     }
 
     .subtitle{
-      max-width: 860px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.6;
       margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.65;
+      max-width:780px;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 18px;
-      margin-top: 22px;
-      align-items: stretch;
-    }
-
-    .panel{
-      background: rgba(15,23,48,.72);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      overflow: hidden;
-    }
-
-    .list{
-      padding: 12px;
-    }
-
-    .app{
+    .hero-actions{
       display:flex;
-      gap: 14px;
-      align-items:flex-start;
-      padding: 14px 14px;
-      border-radius: 14px;
-      text-decoration:none;
-      color: var(--text);
-      border: 1px solid transparent;
-      background: linear-gradient(180deg, rgba(18,28,58,.55), rgba(15,23,48,.35));
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      cursor:pointer;
-      outline:none;
-      margin-bottom: 10px;
-    }
-
-    .app:last-child{ margin-bottom: 0; }
-
-    .app:hover, .app:focus{
-      transform: translateY(-3px);
-      border-color: rgba(124,92,255,.55);
-      background: linear-gradient(180deg, rgba(124,92,255,.16), rgba(18,28,58,.55));
-    }
-
-    .dot{
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      margin-top: 6px;
-      flex: 0 0 auto;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(124,92,255,.12);
-    }
-
-    .dot.green{
-      background: var(--accent2);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
-    }
-
-    .app-title{
-      font-size: 16px;
-      font-weight: 650;
-      margin: 0 0 6px 0;
-      line-height: 1.25;
-    }
-
-    .app-meta{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .details{
-      padding: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 14px;
-      height: 100%;
-    }
-
-    .details-top{
-      padding: 16px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(124,92,255,.18), rgba(15,23,48,.30));
-      border: 1px solid rgba(124,92,255,.20);
-    }
-
-    .details h2{
-      margin: 0 0 8px 0;
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .details p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    .cta{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
+      justify-content:center;
+      gap:9px;
+      padding:11px 15px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.11);
+      color:var(--text);
       text-decoration:none;
-      font-weight: 600;
-      font-size: 14px;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      font-weight:700;
+      font-size:14px;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
 
     .btn:hover{
-      transform: translateY(-2px);
-      background: rgba(124,92,255,.16);
-      border-color: rgba(124,92,255,.40);
+      transform:translateY(-2px);
+      border-color:rgba(109,93,252,.55);
+      background:rgba(109,93,252,.14);
     }
 
     .btn.primary{
-      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(124,92,255,.55));
-      border-color: rgba(124,92,255,.20);
+      background:linear-gradient(135deg, rgba(109,93,252,1), rgba(109,93,252,.58));
+      border-color:rgba(109,93,252,.35);
     }
 
-    .btn.primary:hover{
-      background: linear-gradient(135deg, rgba(124,92,255,1), rgba(124,92,255,.65));
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      height:100%;
+    }
+
+    .stat{
+      background:rgba(15,26,47,.74);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 14px 40px rgba(0,0,0,.24);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:28px;
+      margin-bottom:5px;
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .main{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      background:rgba(15,26,47,.76);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      overflow:hidden;
+    }
+
+    .module-list{
+      padding:12px;
+    }
+
+    .module{
+      width:100%;
+      text-align:left;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:15px;
+      border-radius:17px;
+      border:1px solid transparent;
+      background:linear-gradient(180deg, rgba(20,33,61,.70), rgba(15,26,47,.45));
+      color:var(--text);
+      cursor:pointer;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+      margin-bottom:10px;
+    }
+
+    .module:last-child{ margin-bottom:0; }
+
+    .module:hover,
+    .module.active{
+      transform:translateY(-2px);
+      border-color:rgba(109,93,252,.55);
+      background:linear-gradient(180deg, rgba(109,93,252,.18), rgba(20,33,61,.68));
+    }
+
+    .module-icon{
+      width:38px;
+      height:38px;
+      flex:0 0 auto;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:rgba(109,93,252,.16);
+      border:1px solid rgba(109,93,252,.26);
+      font-size:18px;
+    }
+
+    .module h3{
+      margin:0 0 5px;
+      font-size:16px;
+      line-height:1.25;
+    }
+
+    .module p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .viewer{
+      padding:16px;
+    }
+
+    .video-box{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(0,0,0,.42);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 45px rgba(0,0,0,.35);
+      margin-bottom:16px;
+    }
+
+    .video-box iframe{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .module-details{
+      padding:18px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(109,93,252,.15), rgba(20,33,61,.45));
+      border:1px solid rgba(109,93,252,.20);
+    }
+
+    .module-kicker{
+      color:var(--accent2);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.35px;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+
+    .module-details h2{
+      margin:0 0 8px;
+      font-size:24px;
+      line-height:1.2;
+    }
+
+    .module-details p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .tag{
+      display:inline-flex;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.10);
+      color:rgba(238,243,255,.88);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .note{
+      margin-top:18px;
+      padding:16px 18px;
+      border-radius:18px;
+      border:1px solid rgba(32,201,151,.22);
+      background:rgba(32,201,151,.08);
+      color:rgba(238,243,255,.86);
+      font-size:14px;
+      line-height:1.6;
     }
 
     footer{
-      margin-top: 18px;
-      color: rgba(233,236,243,.72);
-      font-size: 13px;
-      text-align: left;
-      opacity: .9;
-      padding: 10px 2px;
+      margin-top:18px;
+      color:rgba(238,243,255,.68);
+      font-size:13px;
+      padding:8px 2px;
     }
 
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
-      header{ text-align:left; }
+    @media (max-width: 950px){
+      .hero,
+      .main{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:34px;
+      }
+
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px){
+      .wrap{
+        padding-top:26px;
+      }
+
+      .hero-card{
+        padding:22px;
+      }
+
+      h1{
+        font-size:30px;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .module{
+        padding:13px;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="badge">Hub de Aplicações • Confiabilidade & Manutenção</div>
-      <h1>Apps Shiny (Confiabilidade, Falhas sob Demanda e Otimização de Manutenção)</h1>
-      <p class="subtitle">
-        Selecione uma aplicação na lista. Ao passar o mouse, o painel ao lado mostra detalhes do app.
-        Clique para abrir em uma nova aba.
-      </p>
-    </header>
 
-    <div class="grid">
-      <!-- LISTA (esquerda) -->
-      <section class="panel list" aria-label="Lista de aplicações">
-        <a class="app"
-           href="https://confiabilidadecimatec.shinyapps.io/AnaliseWeibull/"
-           target="_blank"
-           data-title="Análise de Confiabilidade – Weibull"
-           data-desc="Modelagem de dados de falha com distribuição de Weibull: estimação de parâmetros, confiabilidade R(t), taxa de falha, vida característica e percentis. Inclui módulo para dimensionamento amostral em testes (incluindo testes de vida acelerada)."
-           data-tags="Weibull • Confiabilidade • Testes acelerados • Tamanho amostral">
-          <span class="dot green"></span>
-          <div>
-            <h3 class="app-title">Análise de Confiabilidade – Weibull</h3>
-            <p class="app-meta">Curvas R(t), taxa de falha, percentis e tamanho amostral (ALT).</p>
-          </div>
-        </a>
+    <section class="hero">
+      <div class="hero-card">
+        <div class="badge">RAM Analysis Software • Reliability, Availability & Maintainability</div>
 
-        <a class="app"
-           href="https://confiabilidadecimatec.shinyapps.io/PFDemand/"
-           target="_blank"
-           data-title="PFDemand – Probabilidade de Falha sob Demanda"
-           data-desc="Cálculo de PFD(t) e PFDavg, com estruturação via Fault Tree Analysis (FTA) e combinação por portões lógicos AND/OR (modo exato e aproximação). Útil para avaliações de risco e estudos alinhados a IEC 61508/61511."
-           data-tags="PFD • SIL • FTA • AND/OR • IEC 61508/61511">
-          <span class="dot green"></span>
-          <div>
-            <h3 class="app-title">PFDemand – Probabilidade de Falha sob Demanda</h3>
-            <p class="app-meta">PFD(t), PFDavg e Fault Tree (AND/OR) para risco funcional.</p>
-          </div>
-        </a>
+        <h1>Software para Análise RAM</h1>
 
-        <a class="app"
-           href="https://confiabilidadecimatec.shinyapps.io/Curvadecustos/"
-           target="_blank"
-           data-title="Curva de Custos – Tempo Ótimo de Manutenção"
-           data-desc="Gera a curva de custo esperado em função do tempo de intervenção, considerando a distribuição do tempo até falha do ativo. A partir dos custos de manutenção corretiva e preventiva, estima o intervalo ótimo de manutenção que minimiza o custo esperado."
-           data-tags="Otimização • Manutenção • Preventiva vs Corretiva • Custo esperado">
-          <span class="dot green"></span>
-          <div>
-            <h3 class="app-title">Curva de Custos – Tempo Ótimo de Manutenção</h3>
-            <p class="app-meta">Otimiza o intervalo de preventiva minimizando custo esperado.</p>
-          </div>
-        </a>
-      </section>
+        <p class="subtitle">
+          Plataforma desenvolvida para apoiar estudos de confiabilidade, disponibilidade e manutenção,
+          integrando ajuste de distribuições, árvore de falhas, simulação, visualização de resultados
+          e cálculo da probabilidade de falha sob demanda.
+        </p>
 
-      <!-- DETALHES (direita) -->
-      <aside class="panel details" aria-label="Detalhes do aplicativo selecionado">
-        <div class="details-top">
-          <h2 id="dTitle">Passe o mouse sobre um app</h2>
-          <p id="dDesc">
-            O painel de detalhes será atualizado com a descrição do aplicativo.
-            Você também pode clicar direto em qualquer item para abrir.
-          </p>
+        <div class="hero-actions">
+          <!-- Troque este href pelo link real do software principal -->
+          <a class="btn primary" href="#" target="_blank">Abrir software ↗</a>
+          <a class="btn secondary" href="#modules">Ver demonstrações</a>
+        </div>
+      </div>
 
-          <div class="cta">
-            <a id="dLink" class="btn primary" href="#" target="_blank" style="pointer-events:none; opacity:.6;">
-              Abrir aplicação ↗
-            </a>
-            <span class="btn" id="dTags" style="cursor:default;">—</span>
-          </div>
+      <div class="stats">
+        <div class="stat">
+          <strong>5</strong>
+          <span>Módulos demonstrados em vídeo</span>
         </div>
 
-        <div>
-          <p style="margin:0;color:rgba(233,236,243,.75);font-size:13px;line-height:1.6;">
-            Dica: no desktop, o painel muda no <b>hover</b>. No celular, toque no app para abrir.
-          </p>
+        <div class="stat">
+          <strong>RAM</strong>
+          <span>Confiabilidade, disponibilidade e mantenabilidade</span>
         </div>
+
+        <div class="stat">
+          <strong>FTA</strong>
+          <span>Análise estruturada por árvore de falhas</span>
+        </div>
+
+        <div class="stat">
+          <strong>PFD</strong>
+          <span>Probabilidade de falha sob demanda</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="main" id="modules">
+
+      <aside class="panel module-list" aria-label="Módulos do software">
+
+        <button class="module active"
+          data-title="Ajuste de Distribuições"
+          data-kicker="Módulo 01"
+          data-video="https://www.youtube.com/embed/pNB2hY9Eb5A"
+          data-desc="Demonstra o módulo de fitting, usado para ajustar distribuições probabilísticas aos dados de falha ou tempo de vida. Esse módulo é a base para estimativas de confiabilidade e análises posteriores."
+          data-tags="Fitting,Distribuições,Confiabilidade,Dados de falha">
+          <span class="module-icon">📈</span>
+          <div>
+            <h3>Ajuste de Distribuições</h3>
+            <p>Modelagem estatística dos dados de falha.</p>
+          </div>
+        </button>
+
+        <button class="module"
+          data-title="Árvore de Falhas"
+          data-kicker="Módulo 02"
+          data-video="https://www.youtube.com/embed/uEW1tjy78ho"
+          data-desc="Apresenta o módulo de Fault Tree Analysis, permitindo estruturar eventos básicos, eventos intermediários e evento topo por meio de relações lógicas."
+          data-tags="FTA,Árvore de Falhas,Eventos,Portões lógicos">
+          <span class="module-icon">🌳</span>
+          <div>
+            <h3>Árvore de Falhas</h3>
+            <p>Construção e análise lógica de cenários de falha.</p>
+          </div>
+        </button>
+
+        <button class="module"
+          data-title="Simulação"
+          data-kicker="Módulo 03"
+          data-video="https://www.youtube.com/embed/pdyQYnifLV8"
+          data-desc="Mostra o módulo de simulação, utilizado para avaliar o comportamento do sistema ao longo do tempo e estimar métricas de desempenho RAM com base nos modelos definidos."
+          data-tags="Simulação,RAM,Monte Carlo,Sistema">
+          <span class="module-icon">⚙️</span>
+          <div>
+            <h3>Simulação</h3>
+            <p>Avaliação dinâmica do comportamento do sistema.</p>
+          </div>
+        </button>
+
+        <button class="module"
+          data-title="Visualização de Resultados"
+          data-kicker="Módulo 04"
+          data-video="https://www.youtube.com/embed/E9yWFU34UZs"
+          data-desc="Demonstra como os resultados são organizados e apresentados no software, facilitando a interpretação das métricas obtidas nas análises e simulações."
+          data-tags="Resultados,Dashboards,Indicadores,Interpretação">
+          <span class="module-icon">📊</span>
+          <div>
+            <h3>Visualização de Resultados</h3>
+            <p>Dashboards e interpretação dos indicadores.</p>
+          </div>
+        </button>
+
+        <button class="module"
+          data-title="Probabilidade de Falha sob Demanda"
+          data-kicker="Módulo 05"
+          data-video="https://www.youtube.com/embed/f7v3YgyMV9M"
+          data-desc="Apresenta o cálculo de probabilidade de falha sob demanda, incluindo recursos para apoiar análises de risco e avaliação de sistemas de segurança."
+          data-tags="PFD,PFDavg,Falha sob demanda,Risco">
+          <span class="module-icon">🛡️</span>
+          <div>
+            <h3>Probabilidade sob Demanda</h3>
+            <p>Cálculo de PFD e apoio à análise de risco.</p>
+          </div>
+        </button>
+
       </aside>
+
+      <section class="panel viewer" aria-label="Demonstração do módulo selecionado">
+
+        <div class="video-box">
+          <iframe
+            id="moduleVideo"
+            src="https://www.youtube.com/embed/pNB2hY9Eb5A"
+            title="Demonstração do módulo"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="module-details">
+          <div class="module-kicker" id="moduleKicker">Módulo 01</div>
+          <h2 id="moduleTitle">Ajuste de Distribuições</h2>
+          <p id="moduleDesc">
+            Demonstra o módulo de fitting, usado para ajustar distribuições probabilísticas aos dados de falha ou tempo de vida.
+            Esse módulo é a base para estimativas de confiabilidade e análises posteriores.
+          </p>
+
+          <div class="tags" id="moduleTags">
+            <span class="tag">Fitting</span>
+            <span class="tag">Distribuições</span>
+            <span class="tag">Confiabilidade</span>
+            <span class="tag">Dados de falha</span>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+    <div class="note">
+      Este HUB apresenta os módulos de um software integrado de Análise RAM. Os vídeos são demonstrações
+      funcionais de cada etapa do fluxo de análise, desde a modelagem dos dados até a visualização dos resultados
+      e o cálculo de indicadores de risco.
     </div>
 
     <footer>
-      © 2026 • Desenvolvido em R Shiny • Confiabilidade e Engenharia de Manutenção
+      © 2026 • RAM Analysis Software • Confiabilidade, Disponibilidade e Mantenabilidade
     </footer>
+
   </div>
 
   <script>
-    const apps  = document.querySelectorAll(".app");
-    const dTitle = document.getElementById("dTitle");
-    const dDesc  = document.getElementById("dDesc");
-    const dTags  = document.getElementById("dTags");
-    const dLink  = document.getElementById("dLink");
+    const modules = document.querySelectorAll(".module");
 
-    function setDetails(el){
-      const title = el.getAttribute("data-title") || "Aplicação";
-      const desc  = el.getAttribute("data-desc")  || "";
-      const tags  = el.getAttribute("data-tags")  || "—";
-      const href  = el.getAttribute("href")       || "#";
+    const moduleVideo = document.getElementById("moduleVideo");
+    const moduleKicker = document.getElementById("moduleKicker");
+    const moduleTitle = document.getElementById("moduleTitle");
+    const moduleDesc = document.getElementById("moduleDesc");
+    const moduleTags = document.getElementById("moduleTags");
 
-      dTitle.textContent = title;
-      dDesc.textContent  = desc;
-      dTags.textContent  = tags;
+    function setModule(button){
+      modules.forEach(item => item.classList.remove("active"));
+      button.classList.add("active");
 
-      dLink.href = href;
-      dLink.style.pointerEvents = "auto";
-      dLink.style.opacity = "1";
+      const title = button.getAttribute("data-title");
+      const kicker = button.getAttribute("data-kicker");
+      const video = button.getAttribute("data-video");
+      const desc = button.getAttribute("data-desc");
+      const tags = button.getAttribute("data-tags").split(",");
+
+      moduleVideo.src = video;
+      moduleKicker.textContent = kicker;
+      moduleTitle.textContent = title;
+      moduleDesc.textContent = desc;
+
+      moduleTags.innerHTML = "";
+      tags.forEach(tag => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = tag.trim();
+        moduleTags.appendChild(span);
+      });
     }
 
-    // Atualiza painel ao passar o mouse
-    apps.forEach(a => {
-      a.addEventListener("mouseenter", () => setDetails(a));
-      a.addEventListener("focus", () => setDetails(a));
+    modules.forEach(button => {
+      button.addEventListener("click", () => setModule(button));
     });
-
-    // Seleção inicial (primeiro item)
-    if(apps.length > 0){
-      setDetails(apps[0]);
-    }
   </script>
+
 </body>
 </html>
