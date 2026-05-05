@@ -253,12 +253,14 @@
       margin-bottom:16px;
     }
 
-    .video-box iframe{
+    .video-box video{
       width:100%;
       height:100%;
       display:block;
+      object-fit:cover;
+      background:#000;
     }
-    
+
     .module-details{
       padding:18px;
       border-radius:18px;
@@ -492,7 +494,6 @@
 
     <main>
 
-      <!-- ABA 1: SOFTWARE RAM -->
       <section class="tab-panel active" id="tab-software">
 
         <div class="section-heading">
@@ -512,8 +513,8 @@
             <button class="module active"
               data-title="Ajuste de Distribuições"
               data-kicker="Módulo 01"
-              data-video="https://www.youtube.com/embed/pNB2hY9Eb5A?autoplay=1&mute=1&loop=1&playlist=pNB2hY9Eb5A&controls=0&modestbranding=1&rel=0&playsinline=1"
-              data-watch="https://youtu.be/pNB2hY9Eb5A"
+              data-video="videos/1-%20Dist%20Fitting1.webm"
+              data-watch="videos/1-%20Dist%20Fitting1.webm"
               data-desc="Demonstra o módulo de fitting, usado para ajustar distribuições probabilísticas aos dados de falha ou tempo de vida. Esse módulo é a base para estimativas de confiabilidade e análises posteriores."
               data-tags="Fitting,Distribuições,Confiabilidade,Dados de falha">
               <span class="module-icon">📈</span>
@@ -526,8 +527,8 @@
             <button class="module"
               data-title="Árvore de Falhas"
               data-kicker="Módulo 02"
-              data-video="https://www.youtube.com/embed/uEW1tjy78ho?autoplay=1&mute=1&loop=1&playlist=uEW1tjy78ho&controls=0&modestbranding=1&rel=0&playsinline=1"
-              data-watch="https://youtu.be/uEW1tjy78ho"
+              data-video="videos/2-%20FTA1.webm"
+              data-watch="videos/2-%20FTA1.webm"
               data-desc="Apresenta o módulo de Fault Tree Analysis, permitindo estruturar eventos básicos, eventos intermediários e evento topo por meio de relações lógicas."
               data-tags="FTA,Árvore de Falhas,Eventos,Portões lógicos">
               <span class="module-icon">🌳</span>
@@ -540,8 +541,8 @@
             <button class="module"
               data-title="Simulação"
               data-kicker="Módulo 03"
-              data-video="https://www.youtube.com/embed/pdyQYnifLV8?autoplay=1&mute=1&loop=1&playlist=pdyQYnifLV8&controls=0&modestbranding=1&rel=0&playsinline=1"
-              data-watch="https://youtu.be/pdyQYnifLV8"
+              data-video="videos/3-%20Simulation1.webm"
+              data-watch="videos/3-%20Simulation1.webm"
               data-desc="Mostra o módulo de simulação, utilizado para avaliar o comportamento do sistema ao longo do tempo e estimar métricas de desempenho RAM com base nos modelos definidos."
               data-tags="Simulação,RAM,Monte Carlo,Sistema">
               <span class="module-icon">⚙️</span>
@@ -554,8 +555,8 @@
             <button class="module"
               data-title="Visualização de Resultados"
               data-kicker="Módulo 04"
-              data-video="https://www.youtube.com/embed/E9yWFU34UZs?autoplay=1&mute=1&loop=1&playlist=E9yWFU34UZs&controls=0&modestbranding=1&rel=0&playsinline=1"
-              data-watch="https://youtu.be/E9yWFU34UZs"
+              data-video="videos/4-%20Results1.webm"
+              data-watch="videos/4-%20Results1.webm"
               data-desc="Demonstra como os resultados são organizados e apresentados no software, facilitando a interpretação das métricas obtidas nas análises e simulações."
               data-tags="Resultados,Dashboards,Indicadores,Interpretação">
               <span class="module-icon">📊</span>
@@ -568,8 +569,8 @@
             <button class="module"
               data-title="Probabilidade de Falha sob Demanda"
               data-kicker="Módulo 05"
-              data-video="https://www.youtube.com/embed/f7v3YgyMV9M?autoplay=1&mute=1&loop=1&playlist=f7v3YgyMV9M&controls=0&modestbranding=1&rel=0&playsinline=1"
-              data-watch="https://youtu.be/f7v3YgyMV9M"
+              data-video="videos/5-%20PFD.webm"
+              data-watch="videos/5-%20PFD.webm"
               data-desc="Apresenta o cálculo de probabilidade de falha sob demanda, incluindo recursos para apoiar análises de risco e avaliação de sistemas de segurança."
               data-tags="PFD,PFDavg,Falha sob demanda,Risco">
               <span class="module-icon">🛡️</span>
@@ -584,14 +585,18 @@
           <section class="panel viewer" aria-label="Demonstração do módulo selecionado">
 
             <div class="video-box">
-              <iframe
+              <video
                 id="moduleVideo"
-                src="https://www.youtube.com/embed/pNB2hY9Eb5A?autoplay=1&mute=1&loop=1&playlist=pNB2hY9Eb5A&controls=0&modestbranding=1&rel=0&playsinline=1"
+                src="videos/1-%20Dist%20Fitting1.webm"
                 title="Demonstração do módulo"
-                frameborder="0"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowfullscreen>
-              </iframe>
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                preload="metadata">
+                Seu navegador não suporta vídeos em WebM.
+              </video>
             </div>
 
             <div class="module-details">
@@ -615,9 +620,10 @@
               <a
                 class="btn secondary"
                 id="watchButton"
-                href="https://youtu.be/pNB2hY9Eb5A"
-                target="_blank">
-                Ver demonstração no YouTube ↗
+                href="videos/1-%20Dist%20Fitting1.webm"
+                target="_blank"
+                rel="noopener noreferrer">
+                Abrir vídeo em nova aba ↗
               </a>
             </div>
 
@@ -632,7 +638,6 @@
         </div>
       </section>
 
-      <!-- ABA 2: FERRAMENTAS ONLINE -->
       <section class="tab-panel" id="tab-tools">
 
         <div class="section-heading">
@@ -650,7 +655,8 @@
 
             <a class="tool-card"
                href="https://confiabilidadecimatec.shinyapps.io/AnaliseWeibull/"
-               target="_blank">
+               target="_blank"
+               rel="noopener noreferrer">
               <div class="tool-icon">📈</div>
               <div>
                 <h3>Análise de Confiabilidade – Weibull</h3>
@@ -665,7 +671,8 @@
 
             <a class="tool-card"
                href="https://confiabilidadecimatec.shinyapps.io/PFDemand/"
-               target="_blank">
+               target="_blank"
+               rel="noopener noreferrer">
               <div class="tool-icon">🛡️</div>
               <div>
                 <h3>PFDemand – Probabilidade de Falha sob Demanda</h3>
@@ -679,7 +686,8 @@
 
             <a class="tool-card"
                href="https://confiabilidadecimatec.shinyapps.io/Curvadecustos/"
-               target="_blank">
+               target="_blank"
+               rel="noopener noreferrer">
               <div class="tool-icon">⚙️</div>
               <div>
                 <h3>Curva de Custos – Tempo Ótimo de Manutenção</h3>
@@ -747,6 +755,9 @@
       const tags = button.getAttribute("data-tags").split(",");
 
       moduleVideo.src = video;
+      moduleVideo.load();
+      moduleVideo.play().catch(() => {});
+
       moduleKicker.textContent = kicker;
       moduleTitle.textContent = title;
       moduleDesc.textContent = desc;
