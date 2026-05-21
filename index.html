@@ -733,7 +733,7 @@
       });
     });
   
-    const modules = document.querySelectorAll(".module");
+    const modules = Array.from(document.querySelectorAll(".module"));
   
     const moduleVideo = document.getElementById("moduleVideo");
     const moduleKicker = document.getElementById("moduleKicker");
@@ -742,38 +742,12 @@
     const moduleTags = document.getElementById("moduleTags");
     const watchButton = document.getElementById("watchButton");
   
-    const playlist = [
-      "videos/1-%20Dist%20Fitting1.webm",
-      "videos/2-%20FTA1.webm",
-      "videos/3-%20Simulation1.webm",
-      "videos/4-%20Results1.webm",
-      "videos/5-%20PFD.webm"
-    ];
-  
-    let playlistMode = true;
     let currentVideoIndex = 0;
   
-    function playVideoByIndex(index) {
+    function atualizarModulo(index) {
       currentVideoIndex = index;
-      moduleVideo.src = playlist[currentVideoIndex];
-      moduleVideo.load();
-      moduleVideo.play().catch(() => {});
-    }
   
-    moduleVideo.addEventListener("ended", () => {
-      if (!playlistMode) return;
-  
-      currentVideoIndex++;
-  
-      if (currentVideoIndex >= playlist.length) {
-        currentVideoIndex = 0;
-      }
-  
-      playVideoByIndex(currentVideoIndex);
-    });
-  
-    function setModule(button){
-      playlistMode = false;
+      const button = modules[currentVideoIndex];
   
       modules.forEach(item => item.classList.remove("active"));
       button.classList.add("active");
@@ -804,13 +778,23 @@
       });
     }
   
-    modules.forEach(button => {
-      button.addEventListener("click", () => setModule(button));
+    modules.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        atualizarModulo(index);
+      });
     });
   
-    // Começa tocando todos em sequência automaticamente
-    playlistMode = true;
-    playVideoByIndex(0);
+    moduleVideo.addEventListener("ended", () => {
+      let nextIndex = currentVideoIndex + 1;
+  
+      if (nextIndex >= modules.length) {
+        nextIndex = 0;
+      }
+  
+      atualizarModulo(nextIndex);
+    });
+  
+    atualizarModulo(0);
   </script>
 
 </body>
