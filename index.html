@@ -591,7 +591,6 @@
                 title="Demonstração do módulo"
                 autoplay
                 muted
-                loop
                 playsinline
                 controls
                 preload="metadata">
@@ -721,50 +720,82 @@
   <script>
     const tabButtons = document.querySelectorAll(".tab-button");
     const tabPanels = document.querySelectorAll(".tab-panel");
-
+  
     tabButtons.forEach(button => {
       button.addEventListener("click", () => {
         const tab = button.getAttribute("data-tab");
-
+  
         tabButtons.forEach(item => item.classList.remove("active"));
         tabPanels.forEach(panel => panel.classList.remove("active"));
-
+  
         button.classList.add("active");
         document.getElementById("tab-" + tab).classList.add("active");
       });
     });
-
+  
     const modules = document.querySelectorAll(".module");
-
+  
     const moduleVideo = document.getElementById("moduleVideo");
     const moduleKicker = document.getElementById("moduleKicker");
     const moduleTitle = document.getElementById("moduleTitle");
     const moduleDesc = document.getElementById("moduleDesc");
     const moduleTags = document.getElementById("moduleTags");
     const watchButton = document.getElementById("watchButton");
-
+  
+    const playlist = [
+      "videos/1-%20Dist%20Fitting1.webm",
+      "videos/2-%20FTA1.webm",
+      "videos/3-%20Simulation1.webm",
+      "videos/4-%20Results1.webm",
+      "videos/5-%20PFD.webm"
+    ];
+  
+    let playlistMode = true;
+    let currentVideoIndex = 0;
+  
+    function playVideoByIndex(index) {
+      currentVideoIndex = index;
+      moduleVideo.src = playlist[currentVideoIndex];
+      moduleVideo.load();
+      moduleVideo.play().catch(() => {});
+    }
+  
+    moduleVideo.addEventListener("ended", () => {
+      if (!playlistMode) return;
+  
+      currentVideoIndex++;
+  
+      if (currentVideoIndex >= playlist.length) {
+        currentVideoIndex = 0;
+      }
+  
+      playVideoByIndex(currentVideoIndex);
+    });
+  
     function setModule(button){
+      playlistMode = false;
+  
       modules.forEach(item => item.classList.remove("active"));
       button.classList.add("active");
-
+  
       const title = button.getAttribute("data-title");
       const kicker = button.getAttribute("data-kicker");
       const video = button.getAttribute("data-video");
       const watch = button.getAttribute("data-watch");
       const desc = button.getAttribute("data-desc");
       const tags = button.getAttribute("data-tags").split(",");
-
+  
       moduleVideo.src = video;
       moduleVideo.load();
       moduleVideo.play().catch(() => {});
-
+  
       moduleKicker.textContent = kicker;
       moduleTitle.textContent = title;
       moduleDesc.textContent = desc;
       watchButton.href = watch;
-
+  
       moduleTags.innerHTML = "";
-
+  
       tags.forEach(tag => {
         const span = document.createElement("span");
         span.className = "tag";
@@ -772,10 +803,14 @@
         moduleTags.appendChild(span);
       });
     }
-
+  
     modules.forEach(button => {
       button.addEventListener("click", () => setModule(button));
     });
+  
+    // Começa tocando todos em sequência automaticamente
+    playlistMode = true;
+    playVideoByIndex(0);
   </script>
 
 </body>
