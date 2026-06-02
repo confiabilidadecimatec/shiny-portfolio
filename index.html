@@ -413,6 +413,63 @@
       line-height:1.6;
     }
 
+
+    .cta-contact{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      align-items:center;
+      padding:22px;
+      border-radius:var(--radius);
+      background:
+        radial-gradient(600px 260px at 20% 20%, rgba(32,201,151,.20), transparent 58%),
+        linear-gradient(135deg, rgba(109,93,252,.22), rgba(15,26,47,.78));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+    }
+
+    .cta-contact h2{
+      margin:0 0 8px;
+      font-size:26px;
+      line-height:1.2;
+    }
+
+    .cta-contact p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .cta-actions{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:stretch;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(32,201,151,.95), rgba(109,93,252,.72));
+      border-color:rgba(255,255,255,.18);
+      box-shadow:0 12px 30px rgba(32,201,151,.18);
+    }
+
+    .cta-email{
+      display:flex;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:13px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:rgba(238,243,255,.88);
+      font-size:13px;
+      font-weight:700;
+      text-decoration:none;
+      word-break:break-word;
+    }
+
     footer{
       margin-top:18px;
       color:rgba(238,243,255,.68);
@@ -422,6 +479,10 @@
 
     @media (max-width:950px){
       .main{
+        grid-template-columns:1fr;
+      }
+
+      .cta-contact{
         grid-template-columns:1fr;
       }
 
@@ -710,6 +771,30 @@
       </section>
 
     </main>
+
+
+    <section class="cta-contact" aria-label="Contato comercial">
+      <div>
+        <span class="eyebrow">Contato e demonstração</span>
+        <h2>Quer saber mais sobre o RAM Analysis Software?</h2>
+        <p>
+          Entre em contato para solicitar acesso, tirar dúvidas sobre aplicação comercial
+          ou conversar sobre estudos de confiabilidade, disponibilidade e mantenabilidade.
+        </p>
+      </div>
+
+      <div class="cta-actions">
+        <a
+          class="btn primary"
+          href="mailto:luis.brauning@fieb.org.br?subject=Interesse%20no%20RAM%20Analysis%20Software">
+          Solicitar contato por e-mail ✉️
+        </a>
+
+        <a class="cta-email" href="mailto:luis.brauning@fieb.org.br">
+          luis.brauning@fieb.org.br
+        </a>
+      </div>
+    </section>
 
     <footer>
       © 2026 • HUB de Confiabilidade e Análise RAM • Engenharia de Manutenção e Risco
