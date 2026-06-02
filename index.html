@@ -456,18 +456,60 @@
       box-shadow:0 12px 30px rgba(32,201,151,.18);
     }
 
-    .cta-email{
+    .email-row{
       display:flex;
-      justify-content:center;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
       padding:10px 12px;
       border-radius:13px;
       background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
+    }
+
+    .email-text{
       color:rgba(238,243,255,.88);
       font-size:13px;
       font-weight:700;
-      text-decoration:none;
       word-break:break-word;
+    }
+
+    .email-icons{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex:0 0 auto;
+    }
+
+    .icon-btn{
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.07);
+      color:var(--text);
+      text-decoration:none;
+      cursor:pointer;
+      font-family:inherit;
+      font-size:16px;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .icon-btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(32,201,151,.45);
+      background:rgba(32,201,151,.12);
+    }
+
+    .copy-feedback{
+      min-height:18px;
+      margin:0;
+      color:var(--accent2);
+      font-size:13px;
+      font-weight:800;
+      text-align:center;
     }
 
     footer{
@@ -790,9 +832,31 @@
           Solicitar contato por e-mail ✉️
         </a>
 
-        <a class="cta-email" href="mailto:luis.brauning@fieb.org.br">
-          luis.brauning@fieb.org.br
-        </a>
+        <div class="email-row">
+          <span class="email-text">luis.brauning@fieb.org.br</span>
+
+          <div class="email-icons">
+            <a
+              class="icon-btn"
+              href="mailto:luis.brauning@fieb.org.br?subject=Interesse%20no%20RAM%20Analysis%20Software"
+              aria-label="Enviar e-mail"
+              title="Enviar e-mail">
+              ✉️
+            </a>
+
+            <button
+              class="icon-btn"
+              type="button"
+              id="copyEmailButton"
+              data-email="luis.brauning@fieb.org.br"
+              aria-label="Copiar e-mail"
+              title="Copiar e-mail">
+              📋
+            </button>
+          </div>
+        </div>
+
+        <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
       </div>
     </section>
 
@@ -879,6 +943,46 @@
       atualizarModulo(nextIndex);
     });
   
+
+    const copyEmailButton = document.getElementById("copyEmailButton");
+    const copyFeedback = document.getElementById("copyFeedback");
+
+    function copiarTextoFallback(texto) {
+      const areaTemporaria = document.createElement("textarea");
+      areaTemporaria.value = texto;
+      areaTemporaria.setAttribute("readonly", "");
+      areaTemporaria.style.position = "absolute";
+      areaTemporaria.style.left = "-9999px";
+      document.body.appendChild(areaTemporaria);
+      areaTemporaria.select();
+      document.execCommand("copy");
+      document.body.removeChild(areaTemporaria);
+    }
+
+    if (copyEmailButton) {
+      copyEmailButton.addEventListener("click", async () => {
+        const email = copyEmailButton.getAttribute("data-email");
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(email);
+          } else {
+            copiarTextoFallback(email);
+          }
+
+          copyFeedback.textContent = "E-mail copiado para a área de transferência!";
+          copyEmailButton.textContent = "✓";
+
+          setTimeout(() => {
+            copyFeedback.textContent = "";
+            copyEmailButton.textContent = "📋";
+          }, 2500);
+        } catch (error) {
+          copyFeedback.textContent = "Não foi possível copiar automaticamente. E-mail: " + email;
+        }
+      });
+    }
+
     atualizarModulo(0);
   </script>
 
