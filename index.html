@@ -131,17 +131,10 @@
       border-color:rgba(109,93,252,.40);
     }
 
-    .tab-panel{
-      display:none;
-    }
+    .tab-panel{ display:none; }
+    .tab-panel.active{ display:block; }
 
-    .tab-panel.active{
-      display:block;
-    }
-
-    .section-heading{
-      margin:0 0 16px;
-    }
+    .section-heading{ margin:0 0 16px; }
 
     .eyebrow{
       display:inline-flex;
@@ -167,6 +160,46 @@
       line-height:1.65;
     }
 
+    /* Abas internas dos módulos do software */
+    .module-tabs{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+      margin:0 0 14px;
+      padding:7px;
+      border-radius:16px;
+      background:rgba(15,26,47,.58);
+      border:1px solid rgba(255,255,255,.09);
+    }
+
+    .module-tab-button{
+      flex:1;
+      min-width:190px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      padding:11px 14px;
+      border-radius:12px;
+      cursor:pointer;
+      font:800 14px/1.2 inherit;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    .module-tab-button:hover{
+      transform:translateY(-1px);
+      color:var(--text);
+      border-color:rgba(32,201,151,.42);
+    }
+
+    .module-tab-button.active{
+      color:var(--text);
+      background:linear-gradient(135deg, rgba(32,201,151,.38), rgba(109,93,252,.45));
+      border-color:rgba(32,201,151,.38);
+    }
+
+    .module-group{ display:none; }
+    .module-group.active{ display:block; }
+
     .main{
       display:grid;
       grid-template-columns:.9fr 1.1fr;
@@ -183,9 +216,7 @@
       overflow:hidden;
     }
 
-    .module-list{
-      padding:12px;
-    }
+    .module-list{ padding:12px; }
 
     .module{
       width:100%;
@@ -238,9 +269,7 @@
       line-height:1.45;
     }
 
-    .viewer{
-      padding:16px;
-    }
+    .viewer{ padding:16px; }
 
     .video-box{
       width:100%;
@@ -383,24 +412,9 @@
       font-size:20px;
     }
 
-    .tool-card h3{
-      margin:0 0 8px;
-      font-size:16px;
-      line-height:1.25;
-    }
-
-    .tool-card p{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.55;
-    }
-
-    .tool-card span{
-      color:var(--accent2);
-      font-weight:800;
-      font-size:13px;
-    }
+    .tool-card h3{ margin:0 0 8px; font-size:16px; line-height:1.25; }
+    .tool-card p{ margin:0 0 14px; color:var(--muted); font-size:13px; line-height:1.55; }
+    .tool-card span{ color:var(--accent2); font-weight:800; font-size:13px; }
 
     .note{
       margin-top:18px;
@@ -412,7 +426,6 @@
       font-size:14px;
       line-height:1.6;
     }
-
 
     .cta-contact{
       margin-top:22px;
@@ -430,18 +443,8 @@
       backdrop-filter:blur(12px);
     }
 
-    .cta-contact h2{
-      margin:0 0 8px;
-      font-size:26px;
-      line-height:1.2;
-    }
-
-    .cta-contact p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.65;
-    }
+    .cta-contact h2{ margin:0 0 8px; font-size:26px; line-height:1.2; }
+    .cta-contact p{ margin:0; color:var(--muted); font-size:14px; line-height:1.65; }
 
     .cta-actions{
       display:flex;
@@ -474,12 +477,7 @@
       word-break:break-word;
     }
 
-    .email-icons{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex:0 0 auto;
-    }
+    .email-icons{ display:flex; align-items:center; gap:8px; flex:0 0 auto; }
 
     .icon-btn{
       width:36px;
@@ -520,429 +518,403 @@
     }
 
     @media (max-width:950px){
-      .main{
-        grid-template-columns:1fr;
-      }
-
-      .cta-contact{
-        grid-template-columns:1fr;
-      }
-
-      h1{
-        font-size:34px;
-      }
-
-      .tools-grid{
-        grid-template-columns:1fr;
-      }
-
-      .tool-card{
-        min-height:auto;
-      }
+      .main, .cta-contact{ grid-template-columns:1fr; }
+      h1{ font-size:34px; }
+      .tools-grid{ grid-template-columns:1fr; }
+      .tool-card{ min-height:auto; }
     }
 
     @media (max-width:560px){
-      .wrap{
-        padding-top:26px;
-      }
-
-      .hero{
-        padding:22px;
-      }
-
-      h1{
-        font-size:30px;
-      }
-
-      .tab-button{
-        min-width:100%;
-      }
-
-      .module{
-        padding:13px;
-      }
-
-      .tool-card{
-        flex-direction:column;
-      }
+      .wrap{ padding-top:26px; }
+      .hero{ padding:22px; }
+      h1{ font-size:30px; }
+      .tab-button, .module-tab-button{ min-width:100%; }
+      .module{ padding:13px; }
+      .tool-card{ flex-direction:column; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-
     <header class="hero">
       <div class="badge">Software RAM completo + ferramentas online especializadas</div>
-
       <h1>HUB de Confiabilidade e Análise RAM</h1>
-
       <p class="subtitle">
-        Explore demonstrações do RAM Analysis Software, uma solução integrada
-        para estudos de confiabilidade, disponibilidade e mantenabilidade,
-        e acesse ferramentas online para análises específicas de confiabilidade,
-        falha sob demanda e otimização de manutenção.
+        Explore demonstrações do RAM Analysis Software, uma solução integrada para estudos de
+        confiabilidade, disponibilidade e mantenabilidade, e acesse ferramentas online para
+        análises específicas de confiabilidade, falha sob demanda e otimização de manutenção.
       </p>
     </header>
 
-    <nav class="tabs" aria-label="Abas principais do HUB">
-      <button class="tab-button active" data-tab="software">
+    <nav class="tabs" aria-label="Abas principais do HUB" role="tablist">
+      <button class="tab-button active" data-tab="software" role="tab" aria-selected="true">
         RAM Analysis Software
       </button>
-
-      <button class="tab-button" data-tab="tools">
+      <button class="tab-button" data-tab="tools" role="tab" aria-selected="false">
         Ferramentas Online
       </button>
     </nav>
 
     <main>
-
       <section class="tab-panel active" id="tab-software">
-
         <div class="section-heading">
           <span class="eyebrow">Software restrito / solução comercial</span>
           <h2>RAM Analysis Software</h2>
           <p>
-            O RAM Analysis Software é uma solução mais completa, voltada para
-            aplicações comerciais, projetos técnicos e estudos avançados. Os vídeos
-            abaixo demonstram os principais módulos da plataforma.
+            O RAM Analysis Software é uma solução completa para aplicações comerciais,
+            projetos técnicos e estudos avançados. A reprodução percorre automaticamente
+            os Módulos Gerais e depois os Módulos Avançados, reiniciando o ciclo ao final.
           </p>
         </div>
 
+        <nav class="module-tabs" aria-label="Categorias de módulos" role="tablist">
+          <button class="module-tab-button active" data-group="general" role="tab" aria-selected="true">
+            Módulos Gerais
+          </button>
+          <button class="module-tab-button" data-group="advanced" role="tab" aria-selected="false">
+            Módulos Avançados
+          </button>
+        </nav>
+
         <div class="main">
-
           <aside class="panel module-list" aria-label="Módulos do RAM Analysis Software">
+            <div class="module-group active" id="group-general" data-group-panel="general">
+              <button class="module active"
+                data-order="0"
+                data-group="general"
+                data-title="Árvore de Falhas"
+                data-kicker="Módulo Geral 01"
+                data-video="videos/Sandbox.webm"
+                data-watch="videos/Sandbox.webm"
+                data-desc="Apresenta o módulo de Fault Tree Analysis, permitindo estruturar eventos básicos, eventos intermediários e evento topo por meio de relações lógicas."
+                data-tags="FTA,Árvore de Falhas,Eventos,Portões lógicos">
+                <span class="module-icon">🌳</span>
+                <div>
+                  <h3>Árvore de Falhas</h3>
+                  <p>Construção e análise lógica de cenários de falha.</p>
+                </div>
+              </button>
 
-            <button class="module active"
-              data-title="Ajuste de Distribuições"
-              data-kicker="Módulo 01"
-              data-video="videos/1-%20Dist%20Fitting1.webm"
-              data-watch="videos/1-%20Dist%20Fitting1.webm"
-              data-desc="Demonstra o módulo de fitting, usado para ajustar distribuições probabilísticas aos dados de falha ou tempo de vida. Esse módulo é a base para estimativas de confiabilidade e análises posteriores."
-              data-tags="Fitting,Distribuições,Confiabilidade,Dados de falha">
-              <span class="module-icon">📈</span>
-              <div>
-                <h3>Ajuste de Distribuições</h3>
-                <p>Modelagem estatística dos dados de falha.</p>
-              </div>
-            </button>
+              <button class="module"
+                data-order="1"
+                data-group="general"
+                data-title="Simulação"
+                data-kicker="Módulo Geral 02"
+                data-video="videos/Simulation.webm"
+                data-watch="videos/Simulation.webm"
+                data-desc="Mostra o módulo de simulação, utilizado para avaliar o comportamento do sistema ao longo do tempo e estimar métricas de desempenho RAM com base nos modelos definidos."
+                data-tags="Simulação,RAM,Monte Carlo,Sistema">
+                <span class="module-icon">⚙️</span>
+                <div>
+                  <h3>Simulação</h3>
+                  <p>Avaliação dinâmica do comportamento do sistema.</p>
+                </div>
+              </button>
 
-            <button class="module"
-              data-title="Árvore de Falhas"
-              data-kicker="Módulo 02"
-              data-video="videos/2-%20FTA1.webm"
-              data-watch="videos/2-%20FTA1.webm"
-              data-desc="Apresenta o módulo de Fault Tree Analysis, permitindo estruturar eventos básicos, eventos intermediários e evento topo por meio de relações lógicas."
-              data-tags="FTA,Árvore de Falhas,Eventos,Portões lógicos">
-              <span class="module-icon">🌳</span>
-              <div>
-                <h3>Árvore de Falhas</h3>
-                <p>Construção e análise lógica de cenários de falha.</p>
-              </div>
-            </button>
+              <button class="module"
+                data-order="2"
+                data-group="general"
+                data-title="Visualização de Resultados"
+                data-kicker="Módulo Geral 03"
+                data-video="videos/ViewResults.webm"
+                data-watch="videos/ViewResults.webm"
+                data-desc="Demonstra como os resultados são organizados e apresentados no software, facilitando a interpretação das métricas obtidas nas análises e simulações."
+                data-tags="Resultados,Dashboards,Indicadores,Interpretação">
+                <span class="module-icon">📊</span>
+                <div>
+                  <h3>Visualização de Resultados</h3>
+                  <p>Dashboards e interpretação dos indicadores.</p>
+                </div>
+              </button>
+            </div>
 
-            <button class="module"
-              data-title="Simulação"
-              data-kicker="Módulo 03"
-              data-video="videos/3-%20Simulation1.webm"
-              data-watch="videos/3-%20Simulation1.webm"
-              data-desc="Mostra o módulo de simulação, utilizado para avaliar o comportamento do sistema ao longo do tempo e estimar métricas de desempenho RAM com base nos modelos definidos."
-              data-tags="Simulação,RAM,Monte Carlo,Sistema">
-              <span class="module-icon">⚙️</span>
-              <div>
-                <h3>Simulação</h3>
-                <p>Avaliação dinâmica do comportamento do sistema.</p>
-              </div>
-            </button>
+            <div class="module-group" id="group-advanced" data-group-panel="advanced">
+              <button class="module"
+                data-order="3"
+                data-group="advanced"
+                data-title="Ajuste de Distribuições"
+                data-kicker="Módulo Avançado 01"
+                data-video="videos/DistributionFitting.webm"
+                data-watch="videos/DistributionFitting.webm"
+                data-desc="Demonstra o módulo de fitting, usado para ajustar distribuições probabilísticas aos dados de falha ou tempo de vida. Esse módulo é a base para estimativas de confiabilidade e análises posteriores."
+                data-tags="Fitting,Distribuições,Confiabilidade,Dados de falha">
+                <span class="module-icon">📈</span>
+                <div>
+                  <h3>Ajuste de Distribuições</h3>
+                  <p>Modelagem estatística dos dados de falha.</p>
+                </div>
+              </button>
 
-            <button class="module"
-              data-title="Visualização de Resultados"
-              data-kicker="Módulo 04"
-              data-video="videos/4-%20Results1.webm"
-              data-watch="videos/4-%20Results1.webm"
-              data-desc="Demonstra como os resultados são organizados e apresentados no software, facilitando a interpretação das métricas obtidas nas análises e simulações."
-              data-tags="Resultados,Dashboards,Indicadores,Interpretação">
-              <span class="module-icon">📊</span>
-              <div>
-                <h3>Visualização de Resultados</h3>
-                <p>Dashboards e interpretação dos indicadores.</p>
-              </div>
-            </button>
+              <button class="module"
+                data-order="4"
+                data-group="advanced"
+                data-title="Probabilidade sob Demanda"
+                data-kicker="Módulo Avançado 02"
+                data-video="videos/PFD.webm"
+                data-watch="videos/PFD.webm"
+                data-desc="Apresenta o cálculo de probabilidade de falha sob demanda, incluindo recursos para apoiar análises de risco e avaliação de sistemas de segurança."
+                data-tags="PFD,PFDavg,Falha sob demanda,Risco">
+                <span class="module-icon">🛡️</span>
+                <div>
+                  <h3>Probabilidade sob Demanda</h3>
+                  <p>Cálculo de PFD e apoio à análise de risco.</p>
+                </div>
+              </button>
 
-            <button class="module"
-              data-title="Probabilidade de Falha sob Demanda"
-              data-kicker="Módulo 05"
-              data-video="videos/5-%20PFD.webm"
-              data-watch="videos/5-%20PFD.webm"
-              data-desc="Apresenta o cálculo de probabilidade de falha sob demanda, incluindo recursos para apoiar análises de risco e avaliação de sistemas de segurança."
-              data-tags="PFD,PFDavg,Falha sob demanda,Risco">
-              <span class="module-icon">🛡️</span>
-              <div>
-                <h3>Probabilidade sob Demanda</h3>
-                <p>Cálculo de PFD e apoio à análise de risco.</p>
-              </div>
-            </button>
+              <button class="module"
+                data-order="5"
+                data-group="advanced"
+                data-title="Curva de Custos"
+                data-kicker="Módulo Avançado 03"
+                data-video="videos/CostCurves.webm"
+                data-watch="videos/CostCurves.webm"
+                data-desc="Apresenta a relação entre custos de manutenção, falhas e tempo de intervenção para apoiar a definição do intervalo economicamente ótimo de manutenção preventiva."
+                data-tags="Custos,Manutenção preventiva,Otimização,Intervalo ótimo">
+                <span class="module-icon">💰</span>
+                <div>
+                  <h3>Curva de Custos</h3>
+                  <p>Otimização econômica das intervenções de manutenção.</p>
+                </div>
+              </button>
 
+              <button class="module"
+                data-order="6"
+                data-group="advanced"
+                data-title="Planejamento de Testes de Vida Acelerados"
+                data-kicker="Módulo Avançado 04"
+                data-video="videos/AFTPlanning.webm"
+                data-watch="videos/AFTPlanning.webm"
+                data-desc="Demonstra o planejamento de testes acelerados para estimar a vida útil em condições normais a partir de ensaios realizados sob níveis elevados de estresse."
+                data-tags="ALT,Vida acelerada,Planejamento de testes,Confiabilidade">
+                <span class="module-icon">🧪</span>
+                <div>
+                  <h3>Planejamento de Testes de Vida Acelerados</h3>
+                  <p>Definição de ensaios acelerados e condições de estresse.</p>
+                </div>
+              </button>
+            </div>
           </aside>
 
           <section class="panel viewer" aria-label="Demonstração do módulo selecionado">
-
             <div class="video-box">
               <video
                 id="moduleVideo"
-                src="videos/1-%20Dist%20Fitting1.webm"
-                title="Demonstração do módulo"
+                src="videos/Sandbox.webm"
+                title="Demonstração do módulo Árvore de Falhas"
                 autoplay
                 muted
                 playsinline
                 controls
                 preload="metadata">
-                Seu navegador não suporta vídeos em WebM.
+                Seu navegador não suporta vídeos em MP4.
               </video>
             </div>
 
             <div class="module-details">
-              <div class="module-kicker" id="moduleKicker">Módulo 01</div>
-
-              <h2 id="moduleTitle">Ajuste de Distribuições</h2>
-
+              <div class="module-kicker" id="moduleKicker">Módulo Geral 01</div>
+              <h2 id="moduleTitle">Árvore de Falhas</h2>
               <p id="moduleDesc">
-                Demonstra o módulo de fitting, usado para ajustar distribuições
-                probabilísticas aos dados de falha ou tempo de vida. Esse módulo
-                é a base para estimativas de confiabilidade e análises posteriores.
+                Apresenta o módulo de Fault Tree Analysis, permitindo estruturar eventos básicos,
+                eventos intermediários e evento topo por meio de relações lógicas.
               </p>
-
-              <div class="tags" id="moduleTags">
-                <span class="tag">Fitting</span>
-                <span class="tag">Distribuições</span>
-                <span class="tag">Confiabilidade</span>
-                <span class="tag">Dados de falha</span>
-              </div>
-
-              <a
-                class="btn secondary"
-                id="watchButton"
-                href="videos/1-%20Dist%20Fitting1.webm"
-                target="_blank"
-                rel="noopener noreferrer">
+              <div class="tags" id="moduleTags"></div>
+              <a class="btn secondary" id="watchButton" href="videos/Sandbox.webm" target="_blank" rel="noopener noreferrer">
                 Abrir vídeo em nova aba ↗
               </a>
             </div>
 
             <div class="commercial-note">
-              Os vídeos acima funcionam como uma prévia visual do software RAM.
-              Por se tratar de uma solução restrita/comercial, o acesso ao sistema
-              completo pode depender de autorização, projeto ou contato institucional.
+             Os vídeos acima funcionam como uma prévia visual do software RAM. Por se tratar de uma solução restrita/comercial, o acesso ao sistema completo pode depender de autorização, projeto ou contato institucional.
             </div>
-
           </section>
-
         </div>
       </section>
 
       <section class="tab-panel" id="tab-tools">
-
         <div class="section-heading">
           <span class="eyebrow">Ferramentas online</span>
           <h2>Aplicações disponíveis para uso remoto</h2>
           <p>
-            Além do RAM Analysis Software, este HUB disponibiliza aplicações online
-            que podem ser acessadas diretamente pelo navegador para análises específicas
-            de confiabilidade, falha sob demanda e otimização de manutenção.
+            Além do RAM Analysis Software, este HUB disponibiliza aplicações online que podem
+            ser acessadas diretamente pelo navegador para análises específicas de confiabilidade,
+            falha sob demanda e otimização de manutenção.
           </p>
         </div>
 
         <section class="panel" style="padding:18px;">
           <div class="tools-grid">
-
-            <a class="tool-card"
-               href="https://confiabilidadecimatec.shinyapps.io/AnaliseWeibull/"
-               target="_blank"
-               rel="noopener noreferrer">
+            <a class="tool-card" href="https://confiabilidadecimatec.shinyapps.io/AnaliseWeibull/" target="_blank" rel="noopener noreferrer">
               <div class="tool-icon">📈</div>
               <div>
                 <h3>Análise de Confiabilidade – Weibull</h3>
-                <p>
-                  Modelagem de dados de falha com distribuição de Weibull, curvas de
-                  confiabilidade, taxa de falha, vida característica, percentis e suporte
-                  a dimensionamento amostral.
-                </p>
+                <p>Modelagem de dados de falha com distribuição de Weibull, curvas de confiabilidade, taxa de falha, vida característica, percentis e suporte a dimensionamento amostral.</p>
                 <span>Abrir aplicação ↗</span>
               </div>
             </a>
 
-            <a class="tool-card"
-               href="https://confiabilidadecimatec.shinyapps.io/PFDemand/"
-               target="_blank"
-               rel="noopener noreferrer">
+            <a class="tool-card" href="https://confiabilidadecimatec.shinyapps.io/PFDemand/" target="_blank" rel="noopener noreferrer">
               <div class="tool-icon">🛡️</div>
               <div>
                 <h3>PFDemand – Probabilidade de Falha sob Demanda</h3>
-                <p>
-                  Cálculo de PFD(t), PFDavg e análise por Fault Tree Analysis com
-                  combinação de eventos por portões lógicos AND/OR.
-                </p>
+                <p>Cálculo de PFD(t), PFDavg e análise por Fault Tree Analysis com combinação de eventos por portões lógicos AND/OR.</p>
                 <span>Abrir aplicação ↗</span>
               </div>
             </a>
 
-            <a class="tool-card"
-               href="https://confiabilidadecimatec.shinyapps.io/Curvadecustos/"
-               target="_blank"
-               rel="noopener noreferrer">
+            <a class="tool-card" href="https://confiabilidadecimatec.shinyapps.io/Curvadecustos/" target="_blank" rel="noopener noreferrer">
               <div class="tool-icon">⚙️</div>
               <div>
                 <h3>Curva de Custos – Tempo Ótimo de Manutenção</h3>
-                <p>
-                  Geração da curva de custo esperado em função do tempo de intervenção,
-                  estimando o intervalo ótimo de manutenção preventiva.
-                </p>
+                <p>Geração da curva de custo esperado em função do tempo de intervenção, estimando o intervalo ótimo de manutenção preventiva.</p>
                 <span>Abrir aplicação ↗</span>
               </div>
             </a>
-
           </div>
         </section>
 
         <div class="note">
-          Essas ferramentas online são módulos acessíveis remotamente. Elas complementam
-          a proposta do RAM Analysis Software, oferecendo recursos específicos que podem
-          ser utilizados diretamente pelo navegador.
+          Essas ferramentas online são módulos acessíveis remotamente. Elas complementam a proposta
+          do RAM Analysis Software, oferecendo recursos específicos diretamente pelo navegador.
         </div>
-
       </section>
-
     </main>
-
 
     <section class="cta-contact" aria-label="Contato comercial">
       <div>
         <span class="eyebrow">Contato e demonstração</span>
         <h2>Quer saber mais sobre o RAM Analysis Software?</h2>
-        <p>
-          Entre em contato para solicitar acesso, tirar dúvidas sobre aplicação comercial
-          ou conversar sobre estudos de confiabilidade, disponibilidade e mantenabilidade.
-        </p>
+        <p>Entre em contato para solicitar acesso, tirar dúvidas sobre aplicação comercial ou conversar sobre estudos de confiabilidade, disponibilidade e mantenabilidade.</p>
       </div>
 
       <div class="cta-actions">
-        <a
-          class="btn primary"
-          href="mailto:luis.brauning@fieb.org.br?subject=Interesse%20no%20RAM%20Analysis%20Software">
+        <a class="btn primary" href="mailto:luis.brauning@fieb.org.br?subject=Interesse%20no%20RAM%20Analysis%20Software">
           Solicitar contato por e-mail ✉️
         </a>
 
         <div class="email-row">
           <span class="email-text">luis.brauning@fieb.org.br</span>
-
           <div class="email-icons">
-            <a
-              class="icon-btn"
-              href="mailto:luis.brauning@fieb.org.br?subject=Interesse%20no%20RAM%20Analysis%20Software"
-              aria-label="Enviar e-mail"
-              title="Enviar e-mail">
-              ✉️
-            </a>
-
-            <button
-              class="icon-btn"
-              type="button"
-              id="copyEmailButton"
-              data-email="luis.brauning@fieb.org.br"
-              aria-label="Copiar e-mail"
-              title="Copiar e-mail">
-              📋
-            </button>
+            <a class="icon-btn" href="mailto:luis.brauning@fieb.org.br?subject=Interesse%20no%20RAM%20Analysis%20Software" aria-label="Enviar e-mail" title="Enviar e-mail">✉️</a>
+            <button class="icon-btn" type="button" id="copyEmailButton" data-email="luis.brauning@fieb.org.br" aria-label="Copiar e-mail" title="Copiar e-mail">📋</button>
           </div>
         </div>
-
         <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
       </div>
     </section>
 
-    <footer>
-      © 2026 • HUB de Confiabilidade e Análise RAM • Engenharia de Manutenção e Risco
-    </footer>
-
+    <footer>© 2026 • HUB de Confiabilidade e Análise RAM • Engenharia de Manutenção e Risco</footer>
   </div>
 
   <script>
     const tabButtons = document.querySelectorAll(".tab-button");
     const tabPanels = document.querySelectorAll(".tab-panel");
-  
+    const moduleVideo = document.getElementById("moduleVideo");
+
     tabButtons.forEach(button => {
       button.addEventListener("click", () => {
-        const tab = button.getAttribute("data-tab");
-  
-        tabButtons.forEach(item => item.classList.remove("active"));
+        const tab = button.dataset.tab;
+
+        tabButtons.forEach(item => {
+          item.classList.remove("active");
+          item.setAttribute("aria-selected", "false");
+        });
         tabPanels.forEach(panel => panel.classList.remove("active"));
-  
+
         button.classList.add("active");
+        button.setAttribute("aria-selected", "true");
         document.getElementById("tab-" + tab).classList.add("active");
+
+        /* Pausa fora da área do software e retoma ao voltar. */
+        if (tab === "software") {
+          moduleVideo.play().catch(() => {});
+        } else {
+          moduleVideo.pause();
+        }
       });
     });
-  
-    const modules = Array.from(document.querySelectorAll(".module"));
-  
-    const moduleVideo = document.getElementById("moduleVideo");
+
+    const moduleTabButtons = Array.from(document.querySelectorAll(".module-tab-button"));
+    const moduleGroups = Array.from(document.querySelectorAll(".module-group"));
+    const modules = Array.from(document.querySelectorAll(".module"))
+      .sort((a, b) => Number(a.dataset.order) - Number(b.dataset.order));
+
     const moduleKicker = document.getElementById("moduleKicker");
     const moduleTitle = document.getElementById("moduleTitle");
     const moduleDesc = document.getElementById("moduleDesc");
     const moduleTags = document.getElementById("moduleTags");
     const watchButton = document.getElementById("watchButton");
-  
+
     let currentVideoIndex = 0;
-  
+
+    function ativarGrupo(groupName) {
+      moduleTabButtons.forEach(button => {
+        const active = button.dataset.group === groupName;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", String(active));
+      });
+
+      moduleGroups.forEach(group => {
+        group.classList.toggle("active", group.dataset.groupPanel === groupName);
+      });
+    }
+
     function atualizarModulo(index) {
-      currentVideoIndex = index;
-  
+      currentVideoIndex = (index + modules.length) % modules.length;
       const button = modules[currentVideoIndex];
-  
+
+      /* A troca automática também abre a aba interna correta. */
+      ativarGrupo(button.dataset.group);
+
       modules.forEach(item => item.classList.remove("active"));
       button.classList.add("active");
-  
-      const title = button.getAttribute("data-title");
-      const kicker = button.getAttribute("data-kicker");
-      const video = button.getAttribute("data-video");
-      const watch = button.getAttribute("data-watch");
-      const desc = button.getAttribute("data-desc");
-      const tags = button.getAttribute("data-tags").split(",");
-  
-      moduleVideo.src = video;
-      moduleVideo.load();
-      moduleVideo.play().catch(() => {});
-  
-      moduleKicker.textContent = kicker;
-      moduleTitle.textContent = title;
-      moduleDesc.textContent = desc;
-      watchButton.href = watch;
-  
+
+      const tags = button.dataset.tags.split(",");
+      moduleKicker.textContent = button.dataset.kicker;
+      moduleTitle.textContent = button.dataset.title;
+      moduleDesc.textContent = button.dataset.desc;
+      watchButton.href = button.dataset.watch;
+      moduleVideo.title = "Demonstração do módulo " + button.dataset.title;
+
       moduleTags.innerHTML = "";
-  
       tags.forEach(tag => {
         const span = document.createElement("span");
         span.className = "tag";
         span.textContent = tag.trim();
         moduleTags.appendChild(span);
       });
+
+      /* Só recarrega o arquivo quando a origem realmente muda. */
+      const nextVideoUrl = new URL(button.dataset.video, window.location.href).href;
+      if (moduleVideo.currentSrc !== nextVideoUrl) {
+        moduleVideo.src = button.dataset.video;
+        moduleVideo.load();
+      }
+
+      moduleVideo.play().catch(() => {
+        /* Autoplay pode ser bloqueado pelo navegador; o usuário ainda pode usar os controles. */
+      });
     }
-  
-    modules.forEach((button, index) => {
+
+    moduleTabButtons.forEach(button => {
       button.addEventListener("click", () => {
-        atualizarModulo(index);
+        const groupName = button.dataset.group;
+        ativarGrupo(groupName);
+
+        /* Ao trocar a aba manualmente, inicia o primeiro módulo daquele grupo. */
+        const firstModuleIndex = modules.findIndex(module => module.dataset.group === groupName);
+        if (firstModuleIndex >= 0) atualizarModulo(firstModuleIndex);
       });
     });
-  
-    moduleVideo.addEventListener("ended", () => {
-      let nextIndex = currentVideoIndex + 1;
-  
-      if (nextIndex >= modules.length) {
-        nextIndex = 0;
-      }
-  
-      atualizarModulo(nextIndex);
+
+    modules.forEach((button, index) => {
+      button.addEventListener("click", () => atualizarModulo(index));
     });
-  
+
+    /* Sequência infinita: Gerais -> Avançados -> Gerais. */
+    moduleVideo.addEventListener("ended", () => {
+      atualizarModulo((currentVideoIndex + 1) % modules.length);
+    });
 
     const copyEmailButton = document.getElementById("copyEmailButton");
     const copyFeedback = document.getElementById("copyFeedback");
@@ -961,7 +933,7 @@
 
     if (copyEmailButton) {
       copyEmailButton.addEventListener("click", async () => {
-        const email = copyEmailButton.getAttribute("data-email");
+        const email = copyEmailButton.dataset.email;
 
         try {
           if (navigator.clipboard && window.isSecureContext) {
@@ -985,6 +957,5 @@
 
     atualizarModulo(0);
   </script>
-
 </body>
 </html>
